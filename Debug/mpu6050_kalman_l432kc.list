@@ -1210,7 +1210,7 @@ void MX_I2C1_Init(void)
  8000e30:	4b1b      	ldr	r3, [pc, #108]	@ (8000ea0 <MX_I2C1_Init+0x74>)
  8000e32:	4a1c      	ldr	r2, [pc, #112]	@ (8000ea4 <MX_I2C1_Init+0x78>)
  8000e34:	601a      	str	r2, [r3, #0]
-  hi2c1.Init.Timing = 0x0060112F;
+  hi2c1.Init.Timing = 0x00B07CB4;
  8000e36:	4b1a      	ldr	r3, [pc, #104]	@ (8000ea0 <MX_I2C1_Init+0x74>)
  8000e38:	4a1b      	ldr	r2, [pc, #108]	@ (8000ea8 <MX_I2C1_Init+0x7c>)
  8000e3a:	605a      	str	r2, [r3, #4]
@@ -1290,7 +1290,7 @@ void MX_I2C1_Init(void)
  8000e9e:	bf00      	nop
  8000ea0:	2000011c 	.word	0x2000011c
  8000ea4:	40005400 	.word	0x40005400
- 8000ea8:	0060112f 	.word	0x0060112f
+ 8000ea8:	00b07cb4 	.word	0x00b07cb4
 
 08000eac <HAL_I2C_MspInit>:
 
@@ -1318,9 +1318,9 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* i2cHandle)
   if(i2cHandle->Instance==I2C1)
  8000ed2:	687b      	ldr	r3, [r7, #4]
  8000ed4:	681b      	ldr	r3, [r3, #0]
- 8000ed6:	4a1f      	ldr	r2, [pc, #124]	@ (8000f54 <HAL_I2C_MspInit+0xa8>)
+ 8000ed6:	4a1e      	ldr	r2, [pc, #120]	@ (8000f50 <HAL_I2C_MspInit+0xa4>)
  8000ed8:	4293      	cmp	r3, r2
- 8000eda:	d137      	bne.n	8000f4c <HAL_I2C_MspInit+0xa0>
+ 8000eda:	d135      	bne.n	8000f48 <HAL_I2C_MspInit+0x9c>
 
   /* USER CODE END I2C1_MspInit 0 */
 
@@ -1344,65 +1344,66 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* i2cHandle)
  8000ef4:	f000 f8b4 	bl	8001060 <Error_Handler>
     }
 
-    __HAL_RCC_GPIOA_CLK_ENABLE();
- 8000ef8:	4b17      	ldr	r3, [pc, #92]	@ (8000f58 <HAL_I2C_MspInit+0xac>)
+    __HAL_RCC_GPIOB_CLK_ENABLE();
+ 8000ef8:	4b16      	ldr	r3, [pc, #88]	@ (8000f54 <HAL_I2C_MspInit+0xa8>)
  8000efa:	6cdb      	ldr	r3, [r3, #76]	@ 0x4c
- 8000efc:	4a16      	ldr	r2, [pc, #88]	@ (8000f58 <HAL_I2C_MspInit+0xac>)
- 8000efe:	f043 0301 	orr.w	r3, r3, #1
+ 8000efc:	4a15      	ldr	r2, [pc, #84]	@ (8000f54 <HAL_I2C_MspInit+0xa8>)
+ 8000efe:	f043 0302 	orr.w	r3, r3, #2
  8000f02:	64d3      	str	r3, [r2, #76]	@ 0x4c
- 8000f04:	4b14      	ldr	r3, [pc, #80]	@ (8000f58 <HAL_I2C_MspInit+0xac>)
+ 8000f04:	4b13      	ldr	r3, [pc, #76]	@ (8000f54 <HAL_I2C_MspInit+0xa8>)
  8000f06:	6cdb      	ldr	r3, [r3, #76]	@ 0x4c
- 8000f08:	f003 0301 	and.w	r3, r3, #1
+ 8000f08:	f003 0302 	and.w	r3, r3, #2
  8000f0c:	60fb      	str	r3, [r7, #12]
  8000f0e:	68fb      	ldr	r3, [r7, #12]
     /**I2C1 GPIO Configuration
-    PA9     ------> I2C1_SCL
-    PA10     ------> I2C1_SDA
+    PB6     ------> I2C1_SCL
+    PB7     ------> I2C1_SDA
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_9|GPIO_PIN_10;
- 8000f10:	f44f 63c0 	mov.w	r3, #1536	@ 0x600
- 8000f14:	667b      	str	r3, [r7, #100]	@ 0x64
+    GPIO_InitStruct.Pin = GPIO_PIN_6|GPIO_PIN_7;
+ 8000f10:	23c0      	movs	r3, #192	@ 0xc0
+ 8000f12:	667b      	str	r3, [r7, #100]	@ 0x64
     GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
- 8000f16:	2312      	movs	r3, #18
- 8000f18:	66bb      	str	r3, [r7, #104]	@ 0x68
+ 8000f14:	2312      	movs	r3, #18
+ 8000f16:	66bb      	str	r3, [r7, #104]	@ 0x68
     GPIO_InitStruct.Pull = GPIO_NOPULL;
- 8000f1a:	2300      	movs	r3, #0
- 8000f1c:	66fb      	str	r3, [r7, #108]	@ 0x6c
+ 8000f18:	2300      	movs	r3, #0
+ 8000f1a:	66fb      	str	r3, [r7, #108]	@ 0x6c
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
- 8000f1e:	2303      	movs	r3, #3
- 8000f20:	673b      	str	r3, [r7, #112]	@ 0x70
+ 8000f1c:	2303      	movs	r3, #3
+ 8000f1e:	673b      	str	r3, [r7, #112]	@ 0x70
     GPIO_InitStruct.Alternate = GPIO_AF4_I2C1;
- 8000f22:	2304      	movs	r3, #4
- 8000f24:	677b      	str	r3, [r7, #116]	@ 0x74
-    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
- 8000f26:	f107 0364 	add.w	r3, r7, #100	@ 0x64
- 8000f2a:	4619      	mov	r1, r3
- 8000f2c:	f04f 4090 	mov.w	r0, #1207959552	@ 0x48000000
- 8000f30:	f000 fee0 	bl	8001cf4 <HAL_GPIO_Init>
+ 8000f20:	2304      	movs	r3, #4
+ 8000f22:	677b      	str	r3, [r7, #116]	@ 0x74
+    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+ 8000f24:	f107 0364 	add.w	r3, r7, #100	@ 0x64
+ 8000f28:	4619      	mov	r1, r3
+ 8000f2a:	480b      	ldr	r0, [pc, #44]	@ (8000f58 <HAL_I2C_MspInit+0xac>)
+ 8000f2c:	f000 fee2 	bl	8001cf4 <HAL_GPIO_Init>
 
     /* I2C1 clock enable */
     __HAL_RCC_I2C1_CLK_ENABLE();
- 8000f34:	4b08      	ldr	r3, [pc, #32]	@ (8000f58 <HAL_I2C_MspInit+0xac>)
- 8000f36:	6d9b      	ldr	r3, [r3, #88]	@ 0x58
- 8000f38:	4a07      	ldr	r2, [pc, #28]	@ (8000f58 <HAL_I2C_MspInit+0xac>)
- 8000f3a:	f443 1300 	orr.w	r3, r3, #2097152	@ 0x200000
- 8000f3e:	6593      	str	r3, [r2, #88]	@ 0x58
- 8000f40:	4b05      	ldr	r3, [pc, #20]	@ (8000f58 <HAL_I2C_MspInit+0xac>)
- 8000f42:	6d9b      	ldr	r3, [r3, #88]	@ 0x58
- 8000f44:	f403 1300 	and.w	r3, r3, #2097152	@ 0x200000
- 8000f48:	60bb      	str	r3, [r7, #8]
- 8000f4a:	68bb      	ldr	r3, [r7, #8]
+ 8000f30:	4b08      	ldr	r3, [pc, #32]	@ (8000f54 <HAL_I2C_MspInit+0xa8>)
+ 8000f32:	6d9b      	ldr	r3, [r3, #88]	@ 0x58
+ 8000f34:	4a07      	ldr	r2, [pc, #28]	@ (8000f54 <HAL_I2C_MspInit+0xa8>)
+ 8000f36:	f443 1300 	orr.w	r3, r3, #2097152	@ 0x200000
+ 8000f3a:	6593      	str	r3, [r2, #88]	@ 0x58
+ 8000f3c:	4b05      	ldr	r3, [pc, #20]	@ (8000f54 <HAL_I2C_MspInit+0xa8>)
+ 8000f3e:	6d9b      	ldr	r3, [r3, #88]	@ 0x58
+ 8000f40:	f403 1300 	and.w	r3, r3, #2097152	@ 0x200000
+ 8000f44:	60bb      	str	r3, [r7, #8]
+ 8000f46:	68bb      	ldr	r3, [r7, #8]
   /* USER CODE BEGIN I2C1_MspInit 1 */
 
   /* USER CODE END I2C1_MspInit 1 */
   }
 }
- 8000f4c:	bf00      	nop
- 8000f4e:	3778      	adds	r7, #120	@ 0x78
- 8000f50:	46bd      	mov	sp, r7
- 8000f52:	bd80      	pop	{r7, pc}
- 8000f54:	40005400 	.word	0x40005400
- 8000f58:	40021000 	.word	0x40021000
+ 8000f48:	bf00      	nop
+ 8000f4a:	3778      	adds	r7, #120	@ 0x78
+ 8000f4c:	46bd      	mov	sp, r7
+ 8000f4e:	bd80      	pop	{r7, pc}
+ 8000f50:	40005400 	.word	0x40005400
+ 8000f54:	40021000 	.word	0x40021000
+ 8000f58:	48000400 	.word	0x48000400
 
 08000f5c <main>:
 /**
